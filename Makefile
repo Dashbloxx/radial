@@ -8,7 +8,7 @@ OBJ = $(SRCS:.c=.o)
 all: Radial
 
 Radial: $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^ -lcurl -lcjson -lncurses
+	$(CC) $(CFLAGS) -o $@ $^ -lcurl -lcjson
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<

@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <stddef.h>
 #include <termios.h>
 #include <unistd.h>
+#include <string.h>
 
 void done()
 {
@@ -27,7 +30,30 @@ int main()
 			"\x1b[38;5;128m888  T88b  888  888 Y88b 888 888 888  888 888 \r\n"
 			"\x1b[38;5;127m888   T88b \"Y888888  \"Y88888 888 \"Y888888 888 \r\n");
 
-	printf("Copyright (C) 2023 Reapiu (Dashbloxx), All rights Reserved.\r\nRadial is a small Discord multitool written in C.");
+	printf("Copyright (C) 2023 Reapiu (Dashbloxx), All rights Reserved.\r\nRadial is a small Discord multitool written in C, for UNIX-like systems.\r\n");
+
+	while(true)
+	{
+		char command[1024];
+		printf("\x1b[31;1m>>> \x1b[0m");
+		fgets(command, sizeof(command), stdin);
+
+		size_t length = strlen(command);
+		if(length > 0 && command[length - 1] == '\n')
+		{
+			command[length - 1] = '\0';
+		}
+
+		if(strcmp(command, "exit") == 0)
+		{
+			return 0;
+		}
+		else if(strlen(command) < 1) { }
+		else
+		{
+			fprintf(stderr, "\x1b[31;4mUnknown command!\x1b[0m\r\n");
+		}
+	}
 
 	getchar();
 
