@@ -12,6 +12,9 @@
 		"stdio.h": "c",
 		"terminal.h": "c",
 		"ioctl.h": "c",
-		"termios.h": "c"
+		"termios.h": "c",
+		"discord.h": "c",
+		"curl.h": "c",
+		"cjson.h": "c"
 	}
 }

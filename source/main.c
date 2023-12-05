@@ -6,6 +6,9 @@
 #include <unistd.h>
 #include <string.h>
 
+#include "string.h"
+#include "discord.h"
+
 void done()
 {
 	printf("\e[?1049l");
@@ -49,6 +52,21 @@ int main()
 			return 0;
 		}
 		else if(strlen(command) < 1) { }
+		else if(strcmp(command, "generate-fingerprint") == 0)
+		{
+			string_t fingerprint;
+			fingerprint.size = 1024;
+			fingerprint.memory = malloc(fingerprint.size);
+			int return_value = experiments(&fingerprint);
+			if(return_value != 0)
+			{
+				fprintf(stderr, "\x1b[31;4mFailed to obtain a fingerprint!\x1b[0m\r\n");
+				continue;
+			}
+
+			printf("Here's a generated fingerprint from Discord's backend: `%s`!\r\n", fingerprint.memory);
+			free(fingerprint.memory);
+		}
 		else
 		{
 			fprintf(stderr, "\x1b[31;4mUnknown command!\x1b[0m\r\n");
